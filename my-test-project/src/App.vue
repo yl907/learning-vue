@@ -5,6 +5,8 @@ import Props2 from './components/2Props.vue'
 import Event from './components/3Event.vue'
 import Model from './components/4Model.vue'
 import FallthroughAttributes from './components/5FallthroughAttributes.vue'
+import Slot1 from './components/6Slot.vue'
+import Slot2 from './components/7Slot.vue'
 
   // 1 Props1: this part is used to pass information from parent component to child component.
   let somevalue = "vue";
@@ -35,8 +37,18 @@ import FallthroughAttributes from './components/5FallthroughAttributes.vue'
     :old-model="oldModel" @update:old-model="(newInput) => {oldModel = newInput}"
     v-model:firstName="myFirstName" v-model:lastName="myLastName"
     >from parent variable 'model': <span>{{ model }}</span></Model> <hr />
-  <FallthroughAttributes class="largeButton"></FallthroughAttributes>
-
+  <FallthroughAttributes class="largeButton"></FallthroughAttributes> <hr />
+  <Slot1>
+    <template v-slot:item1>hello vue</template>
+    <template v-slot:item2>hello slot</template>
+  </Slot1> <hr />
+  <Slot2>
+    <!-- I was wondered why we need 'slotProps'? Since 'v-slot:default' specifies this slot content is uniquely bind to a specific slot outlet in child component, I just think we can directly use the props from child slot, however in this case, if we don't specify '{{slotProps.text}}' then use '{{text}}' instead, actually '{{text}}' may be a totally different variable in parent component.
+      So use 'slotProps' is necessary. -->
+    <template v-slot:default="slotProps">
+      {{ slotProps.text }} {{ slotProps.count }}
+    </template>
+  </Slot2> <hr />
 </template>
 
 <style scoped>
