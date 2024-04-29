@@ -1,9 +1,10 @@
 <script setup>
-import {ref} from 'vue';
+import {ref} from 'vue'
 import Props1 from './components/1Props.vue'
 import Props2 from './components/2Props.vue'
 import Event from './components/3Event.vue'
 import Model from './components/4Model.vue'
+import FallthroughAttributes from './components/5FallthroughAttributes.vue'
 
   // 1 Props1: this part is used to pass information from parent component to child component.
   let somevalue = "vue";
@@ -17,6 +18,8 @@ import Model from './components/4Model.vue'
   const model = ref('this is v-model');
   const oldModel = ref('this is props and event');
   const myFirstName = ref('Yanle'), myLastName = ref('Wu');
+  // 5 Fallthrough Attributes
+
 </script>
 
 <template>
@@ -32,6 +35,7 @@ import Model from './components/4Model.vue'
     :old-model="oldModel" @update:old-model="(newInput) => {oldModel = newInput}"
     v-model:firstName="myFirstName" v-model:lastName="myLastName"
     >from parent variable 'model': <span>{{ model }}</span></Model> <hr />
+  <FallthroughAttributes class="largeButton"></FallthroughAttributes>
 
 </template>
 
