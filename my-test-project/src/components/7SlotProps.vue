@@ -5,6 +5,13 @@
 
 <template>
   <div>
-    <slot name="default" :text="greetingMessage" :count="1"></slot>
+    <span><slot name="default" :text="greetingMessage" :count="1"></slot></span>
   </div>
 </template>
+
+<style scoped>
+  span {
+    font-size: 2em;
+    text-decoration: underline 1px solid aqua;
+  }
+</style>
