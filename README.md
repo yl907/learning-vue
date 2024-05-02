@@ -1,8 +1,8 @@
 # learning-vue
 I followed the guide doc of vue, in this repo are some practices about that.
 
-Component part is in the path '/component-part/src/components/', such as props, event and v-model.
-Basic directive is in the path '/basic-directive/'
+Component part is in the path '/component-part/src/components/', such as props, event and v-model. <br />
+Basic directive is in the path '/basic-directive/src/App.vue' <br />
 You can refer to my code to learning vue doc! It would be much clear for you to understand.
 
 vue-doc-url:
