@@ -48,6 +48,44 @@
     greeting: 'Hello, v-for' 
   })
 
+  // 6.Event Handling
+  const greetingMessage = ref('click me!')
+  function greet(event) {
+    if (greetingMessage.value != 'Hello, Vue.js'){
+      greetingMessage.value = 'Hello, Vue.js';
+    } else {
+      greetingMessage.value = 'click me!';
+    }
+  }
+
+  // 7.Form Input Bindings
+  const message = ref();
+
+  // 8.Lifecycle Hooks
+  import { onMounted } from 'vue';
+  onMounted(() => {
+    console.log('Hello, can you see me? The component is now mounted!');
+  })
+
+  // 9.Watchers
+  import { watch } from 'vue';
+  const originalData = ref(2);
+  const doubledData = ref(4);
+  watch(originalData, calculateDoubledData);
+  function calculateDoubledData() {
+    doubledData.value = originalData.value * 2;
+  }
+  function changeOriginalData() {
+    originalData.value++;
+  }
+
+  // 10.Template Refs
+  const referenceToInput = ref(null); //originally refer to null
+  onMounted(() => {
+    referenceToInput.value.focus();
+    referenceToInput.value.value = 'Hello.';
+  })
+
 </script>
 
 <template>
@@ -114,8 +152,32 @@
   <ul>
     <li v-for="(value, key, index) in myObject">{{ index }}. {{ key }}: {{ value }}</li>
   </ul>
+  <hr />
 
-  <!-- 6. -->
+  <!-- 6.Event Handling -->
+  <button @click="greet">{{ greetingMessage }}</button>
+  <hr />
+
+  <!-- 7.Form Input Bindings -->
+  <p>Message is: {{ message }}</p>
+  <input v-model="message" placeholder="edit me" />  
+  <hr />
+  
+  <!-- 8.Lifecycle Hooks -->
+  <p>check the console😊</p>
+  <hr />
+  
+  <!-- 9.Watchers -->
+  <button @click="changeOriginalData">Add</button>
+  <p>origin: {{ originalData }}</p>
+  <p>doubled: {{ doubledData }}</p>
+  <hr />
+  
+  <!-- 10.Template Refs -->
+  <p>Input below will be automatically focused, and filled with some text when the page is first loaded(mounted).</p>
+  <!-- the ref='' below is actually declare that 'referenceToInput' in js code is an alias of this element. -->
+  <input ref="referenceToInput" /> 
+
 </template>
 
 <style scoped>
