@@ -51,7 +51,7 @@
   // 6.Event Handling
   const greetingMessage = ref('click me!')
   function greet(event) {
-    if (greetingMessage.value != 'Hello, Vue.js'){
+    if (greetingMessage.value !== 'Hello, Vue.js'){
       greetingMessage.value = 'Hello, Vue.js';
     } else {
       greetingMessage.value = 'click me!';
@@ -112,7 +112,7 @@
   <!-- we use an Object here, because we want to use a 'key value' structure to specify if such property is exist -->
   <div :class="{ active:isActive }">this div has a class 'active'.</div>
   <!-- we use Array here, because we need multiple class here, and every class is certainly exist. -->
-  <div :class="[className1, className2]">this div has two class, check it out.s</div>
+  <div :class="[className1, className2]">this div has two class, check it out.</div>
   <hr />
 
   <!-- 4.Conditional Rendering -->
