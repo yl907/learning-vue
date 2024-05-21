@@ -4,6 +4,7 @@
 </script>
 
 <template>
+  <!-- we can use 'props.foo' or 'foo', they're both okay! But if you have a variable accidentally named 'foo', then you can only use 'props.foo' to specify that prop. -->
   <p><span>{{ props.foo }}</span> <span>{{ props.bar }}!</span></p>
   <br />
   <p>This is a number, we can calculate it. Originally it is <span>{{ numberOrString }}</span>, double is <span>{{ numberOrString * 2 }}</span></p>

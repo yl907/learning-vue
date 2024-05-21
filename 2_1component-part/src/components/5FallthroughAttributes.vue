@@ -6,7 +6,7 @@
 
 <template>
   <!-- Fallthrough Attributes, $attrs here is "'class': 'largeButton'" -->
-  <button v-bind="$attrs">click me</button>
+  <button v-bind="$attrs">large button</button>
   <button>normal size</button>
   <!-- this is the value of fallthrough attrs, we use $attrs to specify it in <template> -->
   <p>from $attrs in template: {{ $attrs }}</p>

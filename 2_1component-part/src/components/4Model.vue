@@ -15,7 +15,7 @@
 <template>
   <slot></slot>
   <p>from child variable 'model': <span>{{ model }}</span></p>
-  <div>My input<input v-model="model"></div>
+  <div>My input <input v-model="model"></div>
 
   <!-- older version -->
   <p>old way to achieve two ways binding: <span>{{ props.oldModel }}</span></p>

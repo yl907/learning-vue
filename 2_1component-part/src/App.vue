@@ -40,7 +40,7 @@
   <Props2 :dynamic1=dynamic1 :dynamic2=dynamic2></Props2> <hr />
   <Event @increase-by="(n) => count += n" @decrease-by="(n) => count -= n" @my-signal="() => count = 0"></Event> <p>we link the event in child component to a logical code block(or a function) in parent component <span>{{ count }}</span></p> <hr />
   <Model v-model:model="model" 
-    :old-model="oldModel" @update:old-model="(newInput) => {oldModel = newInput}"
+    v-bind:old-model="oldModel" @update:old-model="(newInput) => {oldModel = newInput}"
     v-model:firstName="myFirstName" v-model:lastName="myLastName"
     >from parent variable 'model': <span>{{ model }}</span></Model> <hr />
   <FallthroughAttributes class="largeButton"></FallthroughAttributes> <hr />

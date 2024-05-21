@@ -1,5 +1,5 @@
 <script setup>
-  // const emit = defineEmits(['inFocus', 'submit']);
+  const emit = defineEmits(['decreaseBy']);
 
   function decreaseButtonClick() {
     emit('decreaseBy', 1);
