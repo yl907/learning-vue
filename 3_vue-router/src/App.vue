@@ -10,8 +10,10 @@
 </script>
 
 <template>
-  <router-view></router-view>
-
+  <div class="view">
+    <router-view></router-view>
+  </div>
+  <hr />
   <nav>
     <div class='box'>
       <!-- <a href="/">Home</a> |
@@ -27,27 +29,61 @@
     </div>  
     <hr />
     <!-- 1.动态路由匹配 -->
+    <!-- 1.Dynamic Route Matching -->
     <div class='box'>
       <p>1.动态路由匹配: 尝试输入路径http://localhost:5173/users/123, 然后将123改成任意字符串试试。</p>          
-      <p>1.Dynamic Route Matching: Try to input url http://localhost:5173/users/123, and replace 123 to any string.</p>
+      <!-- <p>1.Dynamic Route Matching: Try to input url http://localhost:5173/users/123, and replace 123 to any string.</p> -->
     </div>
     <div class="summary">
       <p>
-          1.首先制定路由规则, <br />  
+        1.1.首先制定路由规则, <br />  
         { <br />
           path: '/users/:id', <br />
           component: User <br />
-        } <br />
+        }
       </p>
-      <p>2.然后在视图中调用$route.params.id来查看路由规则中定义的路径参数:id
+      <p>1.2.然后在User视图(组件)中调用$route.params.id来查看路由规则中定义的路径参数:id</p>
+      <p>
+        2.还可以输入任意url, 在路由规则的最后我加入了<br />
+        {<br />
+          path: '/:pathMatch(.*)',<br />
+          component: NotFound<br />
+        }<br />
+        上方代码可以匹配任意url, 于是任何尚未匹配的url路径都会被导向NotFound对应的组件, 这将显示404 Not Found.
       </p>
     </div>
     <hr />
-
+    <!-- 2.路由的匹配语法 -->
+    <!-- 2.Routes' Matching Syntax -->
+    <div class="box">
+      <p>1.路由的匹配语法: 尝试输入路径http://localhost:5173/321和http://localhost:5173/9abc123</p>
+    </div>
+    <div class="summary">
+      <p>1.路由规则如下: <br />
+      { <br />
+        path: '/:orderId(\\d+)',<br />
+        component: OrderId<br />
+      },<br />
+      {<br />
+        path: '/:productName',<br />
+        component: ProductName<br />
+      }<br />
+    </p>
+    <p>2.其中(\\d+)是正则表达式, <a target="blank_" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions">参考MDN正则表达式教程</a></p>
+    </div>
   </nav>
 </template> 
 
 <style scoped>
+  .view {
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    border-radius: 1em;
+    padding: 1em;
+    background-color: blanchedalmond;
+  }
+
   .box {
     padding: 1em;
     border: 1px solid black;
@@ -67,5 +103,9 @@
     border: 1px solid;
     margin-top: 1em;
     width: fit-content;
+    
+    a {
+      color: white;
+    }
   }
 </style>
