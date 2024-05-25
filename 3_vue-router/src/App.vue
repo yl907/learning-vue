@@ -1,17 +1,27 @@
 <script>
   import dataEggs from './data.json'
+  import ProgramNavComp from './components/5_1ProgrammaticNavigation.vue'
+
   export default {
     data() {
       return {
         dataEggs
       }
+    },
+    components: {
+      ProgramNavComp
     }
   }
+
 </script>
 
 <template>
   <div class="view">
     <router-view></router-view>
+    <div class="twoColumns">
+      <div><router-view name="LeftSidebar"></router-view></div>
+      <div><router-view name="RightSidebar"></router-view></div>
+    </div>
   </div>
   <hr />
   <nav>
@@ -19,6 +29,7 @@
       <!-- <a href="/">Home</a> |
       <a href="/about">About</a> | -->
       <router-link to="/">Home</router-link> |
+      <!-- <router-link :to="{ path: '/' }">Home</router-link> | -->
       <router-link to="/about">About</router-link> |
       <router-link v-for="dataEgg in dataEggs"
         :key="dataEgg.id"
@@ -107,9 +118,26 @@
     <p>3.还存在一个问题是当使用name进行路由跳转时, 原本在使用path时标明的路径参数在这种情况下是未知的。 如果要实现路径参数则需要在router-link中加入params属性, 在其中给出所有路径参数。在给出路径参数后，路由对应组件NamedRoutes中包含$route.params.exampleParams即可被使用。</p>
     <p>4.综上可以看出命名路由只是普通path路由的一个别名, 其效果跟path路由是完全一致的。</p>
   </div>
+  <hr />
+  <!-- 5.编程式导航 -->
+  <ProgramNavComp></ProgramNavComp>
+  <hr />
+  <!-- 6.命名视图 -->
+  <div class="box">
+    <h2>6.命名视图</h2>
+    <p>1.命名视图: 当我们需要同时展示多个视图时, 例如创建一个布局, 有sidebar和main两个视图, 这个时候命名视图就派上用场了。</p>
+    <p>2.<router-link to="/multiViews">跳转到命名视图路径(常用于存在多个视图的情况)</router-link></p>
+  </div>
+
+  
 </template> 
 
 <style scoped>
+  .twoColumns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
   .view {
     position: sticky;
     top: 0px;
