@@ -23,7 +23,8 @@ const routes = [
   },
   {
     path: '/about',
-    component: AboutView
+    component: AboutView,
+    alias: '/anotherAbout'
   },
   {
     // 使用':'来动态匹配具体的字符串，其中':id'表示一个动态字段(其可能是任何字符串)，我们称':id'为路径参数param。
@@ -84,6 +85,12 @@ const routes = [
       RightSidebar: RightSidebar
     }
   },
+  // 7.重定向和别名  7.Redirect and Alias
+  {
+    path: '/home',
+    redirect: '/'
+  },
+  // 7.1别名部分写在/about路由规则中
 
   // -1.404 Not Found(put this one at last, so it will match everything not match yet)
   {

@@ -5,7 +5,12 @@
   export default {
     data() {
       return {
-        dataEggs
+        dataEggs,
+        templateIn6Multiviews: `
+<router-view></router-view>
+<router-view name="LeftSidebar"></router-view>
+<router-view name="RightSidebar"></router-view>
+`.trim()
       }
     },
     components: {
@@ -127,6 +132,36 @@
     <h2>6.命名视图</h2>
     <p>1.命名视图: 当我们需要同时展示多个视图时, 例如创建一个布局, 有sidebar和main两个视图, 这个时候命名视图就派上用场了。</p>
     <p>2.<router-link to="/multiViews">跳转到命名视图路径(常用于存在多个视图的情况)</router-link></p>
+  </div>
+  <div class="summary">
+    <p>1.本例中的命名视图的路由规则如下: <br />
+      { <br />
+        path: '/multiViews', <br />
+        components: { <br />
+          default: NamedViews, <br />
+          LeftSidebar: LeftSidebar, <br />
+          RightSidebar: RightSidebar <br />
+        } <br />
+      }
+    </p>
+    <p>2.这种情况下router-view也要有3个, 分别是: <br />
+      <pre>{{ templateIn6Multiviews }}</pre>
+    </p>
+  </div>
+  <hr />
+  <!-- 7.重定向与别名 -->
+  <div class="box">
+    <h2>7.重定向与别名</h2>
+    <p>
+      1.重定向: 本例中, 当你访问 /home 时, 会自动重定向到 /. <br />
+      { <br />
+      path: '/home', <br />
+      redirect: '/' <br />
+      }
+    </p>
+    <p>2.别名: 重定向是指当用户访问 /home 时, URL 会被 / 替换, 然后匹配成 /. 那么什么是别名呢?
+  将 / 别名为 /home, 意味着当用户访问 /home 时, URL 仍然是 /home, 但会被匹配为用户正在访问 /.(相对于重定向而言, URL不会发生改变)</p>
+    <p>3.别名实例: 尝试访问 /anotherAbout , 在该页面实际上是在访问 /about. </p>
   </div>
 
   

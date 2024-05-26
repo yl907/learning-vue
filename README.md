@@ -13,6 +13,7 @@ I followed the guide doc of vue, in this repo are some practices about that.
 1_2basic-directive-options: is in the path '/1_2basic-directive-options/src/components' <br />
 2_1Component-part: is in the path '/2_1component-part/src/components/', such as props, event and v-model. <br />
 2_2Component-part-options: is in the path '/2_2component-part-options/src/components/', such as props, event and v-model. <br />
+3_vue router: Follow the official tutorial of vue-router, with the main code located in src/router/index.js, In src/views, src/main.js, src/App.vue. <br />
 
 
 You can refer to my code to learning vue doc! It would be much clear for you to understand.<br />
