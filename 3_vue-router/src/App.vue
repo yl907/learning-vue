@@ -163,6 +163,37 @@
   将 / 别名为 /home, 意味着当用户访问 /home 时, URL 仍然是 /home, 但会被匹配为用户正在访问 /.(相对于重定向而言, URL不会发生改变)</p>
     <p>3.别名实例: 尝试访问 /anotherAbout , 在该页面实际上是在访问 /about. </p>
   </div>
+  <div class="summary">
+    <p>1.重定向和别名都是在访问url_1时, 呈现url_2的页面, 其中重定向改变用户界面的url路径, 别名则不改变url路径。</p>
+  </div>
+  <hr />
+  <!-- 8.导航守卫 -->
+  <div class="box">
+    <h2>8.导航守卫</h2>
+    <p>1.可以参考src/router/index.js中关于全局前置守卫beforeEach的代码, 该代码检测路径参数id是否只由0构成, 如果是那么该路由不会跳转.</p>
+    <p><router-link to="/users/000">http://localhost:5173/users/000 <br />
+      (无法通过点击该链接跳转, 当全局前置守卫返回false时, 这种跳转被直接禁止。但可以通过直接输入该url进行测试)</router-link></p>
+    <p>2.为什么还需要全局解析守卫beforeResolve, 而不能只用beforeEach? </p> 
+    <ol>
+      <li>为了异步组件加载, beforeEach 无法保证所有异步组件都已经加载完成。如果某些逻辑依赖于这些组件, 使用 beforeResolve 可以确保这些组件都已经就绪。</li>
+      <li>为了最后一步确认, 有时候你需要在所有前置操作完成后进行最终的检查或确认, 比如在所有异步操作和权限检查完成后再做某些决定。</li>
+    </ol>
+    <p>
+      3.beforeEnter:beforeEnter 守卫 只在进入路由时触发，不会在 params、query 或 hash 改变时触发。例如，从 /users/2 进入到 /users/3 或者从 /users/2#info 进入到 /users/2#projects。它们只有在 从一个不同的 路由导航时，才会被触发。<br />
+      <br />
+      本例中代码如下: <br />
+      path: '/nest/:id', <br />
+      component: NestedRoutes, <br />
+      beforeEnter: (to, from) => { <br />
+        if (to.params.id === '001') { <br />
+          return false; <br />
+        } <br />
+      },  <br />
+      所以访问<router-link to="/nest/001">http://localhost:5173/nest/001 (该链接由于没有路由数据返回, 同样无法通过点击跳转, 请尝试输入该url进行测试)</router-link>时, 不会有路由数据被返回。
+    </p> 
+
+
+  </div>
 
   
 </template> 

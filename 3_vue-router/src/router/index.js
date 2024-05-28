@@ -24,6 +24,7 @@ const routes = [
   {
     path: '/about',
     component: AboutView,
+    // 别名
     alias: '/anotherAbout'
   },
   {
@@ -31,7 +32,9 @@ const routes = [
     path: '/eggs/:eggType',
     component: () => Eggs
   },
-
+// **************
+// ESSENTIAL PART
+// **************
   // 1.动态路由匹配  1.Dynamic Route Matching
   {
     path: '/users/:id',
@@ -50,6 +53,12 @@ const routes = [
   {
     path: '/nest/:id',
     component: NestedRoutes,
+    // 8.5.路由独享的守卫beforeEnter
+    beforeEnter: (to, from) => {
+      if (to.params.id === '001') {
+        return false;
+      }
+    },
     children: [
       {
         // 3.1.匹配/nest/:id/profile
@@ -92,6 +101,9 @@ const routes = [
   },
   // 7.1别名部分写在/about路由规则中
 
+  // 
+
+
   // -1.404 Not Found(put this one at last, so it will match everything not match yet)
   {
     path: '/:pathMatch(.*)',
@@ -104,5 +116,54 @@ const router = createRouter({
   history: createWebHistory(),
   routes: routes
 })
+
+// *************
+// ADVANCED PART
+// *************
+  // 8.导航守卫
+  // 8.1.全局前置守卫
+  router.beforeEach((to, from) => {
+    if (to.params.id) {
+      if (isOnlyZero(to.params.id)) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
+
+  });
+
+  function isOnlyZero(s) {
+    for (let i = 0; i < s.length; i++) {
+      if (s[i] !== '0') {
+        return false;
+      } else {
+        return true;
+      }
+    }
+    return false;
+  }
+  // 8.2.全局解析守卫
+  router.beforeResolve((to, from) => {
+    console.log('finish loading');
+  });
+  // 8.3.全局后置守卫
+  router.afterEach((to, from) => {
+    console.log('after each');
+  });
+  // 8.4.在导航守卫内使用 inject() 方法
+  // main.js
+  // const app = createApp(App)
+  // app.provide('global', 'hello injections')
+
+  // 下方代码应当放到一个vue文件的script setup中才能生效, 所以此处将下方代码注释掉了。
+  // router.beforeEach((to, from) => {
+  //   const global = inject('global') // 'hello injections'
+  //   if (to.params.id === '111') {
+  //     console.log(global);
+  //   }
+  // });
 
 export default router

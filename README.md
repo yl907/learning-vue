@@ -5,6 +5,7 @@
 2_1Component-part: vue官方教程中的Component In-Depth部分，介绍了vue的组件。 <br />
 2_2Component-part-options: 同上，但是具体代码是options的格式。 <br />
 3_vue-router: 跟随vue-router的官方教程来学习, 主要代码在src/router/index.js, src/views, src/main.js, src/App.vue中。<br />
+4_vuex: 跟随vuex的官方教程学习, 主要代码在src/store/index.js, src/App.vue中
 
 --------------------------------------------------------
 I followed the guide doc of vue, in this repo are some practices about that.
