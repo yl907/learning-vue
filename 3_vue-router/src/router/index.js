@@ -14,6 +14,18 @@ import ProgramNavView from '../views/5_1ProgrammaticNavigation.vue'
 import NamedViews from '../views/6_1DefaultView.vue'
 import LeftSidebar from '../views/6_2LeftSidebar.vue'
 import RightSidebar from '../views/6_3RightSidebar.vue'
+import Login from '../views/9Login.vue'
+
+// 这是关于9.路由元信息的内容
+import store from '../store'
+const auth = {};
+auth.isLoggedIn = function() {
+  if (store.state.login) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 const routes = [
   {
@@ -53,22 +65,31 @@ const routes = [
   {
     path: '/nest/:id',
     component: NestedRoutes,
-    // 8.5.路由独享的守卫beforeEnter
+    // 8.5.路由独享的守卫beforeEnter----------------
     beforeEnter: (to, from) => {
       if (to.params.id === '001') {
         return false;
       }
     },
+    // --------------------------------------------
     children: [
       {
         // 3.1.匹配/nest/:id/profile
         path: 'profile',
         component: NestedProfile,
+        // 9.路由元信息  9.Route Meta Fields------------------------------------
+        // 有时, 你可能希望将任意信息附加到路由上。这时路由元信息是一个很不错的选择。
+        // 以下是两个路由元信息的例子, 均是requiresAuth属性名与一个bool值。
+        // 9.1.任何人都可以阅读文章
+        meta: { requiresAuth: false },
       },
       {
         // 3.2.匹配/nest/:id/posts
         path: 'posts',
         component: NestedPosts,
+        // 9.2.只有经过身份验证的用户才能创建帖子
+        meta: { requiresAuth: true },
+        // ---------------------------------------------------------------------
       }
     ]
   },
@@ -101,7 +122,11 @@ const routes = [
   },
   // 7.1别名部分写在/about路由规则中
 
-  // 
+  // 为了搭配9.3.使用的/login路由
+  {
+    path: '/login',
+    component: Login,
+  },
 
 
   // -1.404 Not Found(put this one at last, so it will match everything not match yet)
@@ -165,5 +190,25 @@ const router = createRouter({
   //     console.log(global);
   //   }
   // });
+
+  // 9.3.一个在路由全局导航中使用路由元信息的例子
+  // beforeEach 导航守卫可以返回多种类型的值来控制导航的行为：
+  // 1返回 false：取消当前导航。
+  // 2返回 undefined, true 或不返回值：继续当前导航。
+  // 3返回一个路由对象：重定向到指定的路由。
+  router.beforeEach((to, from) => {
+    // 而不是去检查每条路由记录
+    // to.matched.some(record => record.meta.requiresAuth)
+    if (to.meta.requiresAuth && !auth.isLoggedIn()) {
+      // 此路由需要授权，请检查是否已登录
+      // 如果没有，则重定向到登录页面
+      return {
+        path: '/login',
+        // 在查询参数中保存我们所在的位置, 以便以后再来(查询参数的形式大致是路径后面以 ? 开头, 键值对之间以 & 分隔。)
+        query: { redirect: to.fullPath },
+      }
+    }
+  })
+  
 
 export default router

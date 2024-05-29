@@ -1,6 +1,7 @@
 <script>
   import dataEggs from './data.json'
   import ProgramNavComp from './components/5_1ProgrammaticNavigation.vue'
+import store from './store';
 
   export default {
     data() {
@@ -15,7 +16,14 @@
     },
     components: {
       ProgramNavComp
-    }
+    },
+    methods: {
+      changeAuth() {
+        store.commit('changeAuth');
+
+      },
+    },
+
   }
 
 </script>
@@ -95,6 +103,10 @@
   <div class="box">
     <h2>3.嵌套路由</h2>
     <p>1.嵌套路由: 尝试输入路径<router-link to="/nest/123/profile">http://localhost:5173/nest/123/profile</router-link>和<router-link to="/nest/123/posts">http://localhost:5173/nest/123/posts</router-link></p>
+    <router-link to="/">
+      <button @click="changeAuth">修改login状态: {{ $store.state.login }} <br />
+      (这是有关第9部分路由元信息的内容。尝试点击该按钮后, 再次点击上方http://localhost:5173/nest/123/posts链接, 你会发现不同login状态下的相同路由会有不同表现。)</button>
+    </router-link>
   </div>
   <div class="summary">
     <p>1.嵌套路由是在router-view标签内继续加入router-view标签: <br />
