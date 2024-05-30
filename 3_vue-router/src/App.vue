@@ -203,10 +203,13 @@ import store from './store';
       },  <br />
       所以访问<router-link to="/nest/001">http://localhost:5173/nest/001 (该链接由于没有路由数据返回, 同样无法通过点击跳转, 请尝试输入该url进行测试)</router-link>时, 不会有路由数据被返回。
     </p> 
-
-
   </div>
-
+  <hr />
+  <!-- 9.路由元信息 -->
+  <div class="box">
+    <h2>9.路由元信息</h2>
+    <p>参考[3.嵌套路由]中的"修改login状态"按钮, 路由元信息(meta)配合导航守卫(beforeEach)使得具有特定路由元信息的路由有额外效果, 在此处是确认登录后才有权限查看profile, 否则会跳转到登录页面。</p>
+  </div>
   
 </template> 
 

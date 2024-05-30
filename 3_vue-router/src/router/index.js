@@ -15,6 +15,7 @@ import NamedViews from '../views/6_1DefaultView.vue'
 import LeftSidebar from '../views/6_2LeftSidebar.vue'
 import RightSidebar from '../views/6_3RightSidebar.vue'
 import Login from '../views/9Login.vue'
+import DataFetching from '../views/10_1DataFetching.vue'
 
 // 这是关于9.路由元信息的内容
 import store from '../store'
@@ -80,14 +81,14 @@ const routes = [
         // 9.路由元信息  9.Route Meta Fields------------------------------------
         // 有时, 你可能希望将任意信息附加到路由上。这时路由元信息是一个很不错的选择。
         // 以下是两个路由元信息的例子, 均是requiresAuth属性名与一个bool值。
-        // 9.1.任何人都可以阅读文章
+        // 9.1.任何人都可以查看profile
         meta: { requiresAuth: false },
       },
       {
         // 3.2.匹配/nest/:id/posts
         path: 'posts',
         component: NestedPosts,
-        // 9.2.只有经过身份验证的用户才能创建帖子
+        // 9.2.只有经过身份验证的用户才能查看posts
         meta: { requiresAuth: true },
         // ---------------------------------------------------------------------
       }
@@ -126,6 +127,11 @@ const routes = [
   {
     path: '/login',
     component: Login,
+  },
+  // 10.数据获取
+  {
+    path: '/DataFetching/:id',
+    component: DataFetching,
   },
 
 
@@ -197,7 +203,6 @@ const router = createRouter({
   // 2返回 undefined, true 或不返回值：继续当前导航。
   // 3返回一个路由对象：重定向到指定的路由。
   router.beforeEach((to, from) => {
-    // 而不是去检查每条路由记录
     // to.matched.some(record => record.meta.requiresAuth)
     if (to.meta.requiresAuth && !auth.isLoggedIn()) {
       // 此路由需要授权，请检查是否已登录
