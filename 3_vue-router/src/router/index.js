@@ -15,9 +15,10 @@ import NamedViews from '../views/6_1DefaultView.vue'
 import LeftSidebar from '../views/6_2LeftSidebar.vue'
 import RightSidebar from '../views/6_3RightSidebar.vue'
 import Login from '../views/9Login.vue'
-import DataFetching from '../views/10_1DataFetching.vue'
+import DataFetching1 from '../views/10_1DataFetching.vue'
+import DataFetching2 from '../views/10_2DataFetching.vue'
 
-// 这是关于9.路由元信息的内容
+// 这是关于9.路由元信息的内容------
 import store from '../store'
 const auth = {};
 auth.isLoggedIn = function() {
@@ -27,6 +28,7 @@ auth.isLoggedIn = function() {
     return false;
   }
 }
+// ------------------------------
 
 const routes = [
   {
@@ -130,8 +132,12 @@ const routes = [
   },
   // 10.数据获取
   {
-    path: '/DataFetching/:id',
-    component: DataFetching,
+    path: '/DataFetching1/:id',
+    component: DataFetching1,
+  },
+  {
+    path: '/DataFetching2',
+    component: DataFetching2,
   },
 
 

@@ -210,7 +210,17 @@ import store from './store';
     <h2>9.路由元信息</h2>
     <p>参考[3.嵌套路由]中的"修改login状态"按钮, 路由元信息(meta)配合导航守卫(beforeEach)使得具有特定路由元信息的路由有额外效果, 在此处是确认登录后才有权限查看profile, 否则会跳转到登录页面。</p>
   </div>
-  
+  <hr />
+  <!-- 10.数据获取 -->
+  <div class="box">
+    <h2>10.数据获取</h2>
+    <p>1.尝试访问<router-link to="/DataFetching1/abcd">http://localhost:5173/DataFetching1/abcd</router-link>, 这会在获取数据后再展示组件内容, 我在获取数据的代码中设置了3s等待, 于是3s后才会显示组件内容。</p>
+    <p>2.尝试访问<router-link to="/DataFetching2">http://localhost:5173/DataFetching2</router-link></p>
+  </div>
+  <div class="summary">
+    <p>1.通过点击上方链接访问 /DataFetching1/abcd 时, 你会发现没有反馈感。 因为这个例子是固定3s后才出现组件内容, 于是可能会让用户认为点击失效了或者网页发生了故障。</p>
+    <p>2.而访问 /DataFetching2 明显是有反馈的, 点击后会瞬间出现Loading...提示</p>
+  </div>
 </template> 
 
 <style scoped>
