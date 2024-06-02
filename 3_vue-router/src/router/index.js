@@ -17,6 +17,7 @@ import RightSidebar from '../views/6_3RightSidebar.vue'
 import Login from '../views/9Login.vue'
 import DataFetching1 from '../views/10_1DataFetching.vue'
 import DataFetching2 from '../views/10_2DataFetching.vue'
+import CompositionAPI from '../views/11CompositionAPI.vue'
 
 // 这是关于9.路由元信息的内容------
 import store from '../store'
@@ -138,6 +139,11 @@ const routes = [
   {
     path: '/DataFetching2',
     component: DataFetching2,
+  },
+  // 11.组合式API
+  {
+    path: '/CompositionAPI/:id',
+    component: CompositionAPI,
   },
 
 
