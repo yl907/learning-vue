@@ -30,7 +30,17 @@ import store from './store';
 
 <template>
   <div class="view">
-    <router-view></router-view>
+    <!-- 12.RouterView插槽  13.过渡动效 (CSS部分添加在本文件的CSS最后) -->
+    <router-view v-slot="{ Component }">
+      <!-- transition给组件加入转变效果 -->
+      <transition name="fade">
+        <!-- keep alive保持路由组件活跃 -->
+        <keep-alive>
+          <component :is="Component"/>
+        </keep-alive>
+      </transition>
+    </router-view>
+    <!-- ----------------------------- -->
     <div class="twoColumns">
       <div><router-view name="LeftSidebar"></router-view></div>
       <div><router-view name="RightSidebar"></router-view></div>
@@ -221,6 +231,47 @@ import store from './store';
     <p>1.通过点击上方链接访问 /DataFetching1/abcd 时, 你会发现没有反馈感。 因为这个例子是固定3s后才出现组件内容, 于是可能会让用户认为点击失效了或者网页发生了故障。</p>
     <p>2.而访问 /DataFetching2 明显是有反馈的, 点击后会瞬间出现Loading...提示</p>
   </div>
+  <hr />
+  <!-- 11.组合式API -->
+  <div class="box">
+    <h2>11.组合式API</h2>
+    <p>1.用 useRouter()和useRoute() 来代替 this.$router和this.$route</p>
+  </div>
+  <div class="summary">
+    <p>
+      1.views文件对应部分<br />
+      1.1.script setup<br />
+      import {useRoute, useRouter} from 'vue-router'<br />
+      const router = useRouter();<br />
+      const route = useRoute();<br />
+      1.2.template<br />
+      hello, <span v-pre>{{ route.params.id }}</span>
+    </p>
+    <p>
+      2.router对应部分<br />
+      {<br />
+        path: '/CompositionAPI/:id',<br />
+        component: CompositionAPI,<br />
+      }<br />
+      尝试访问<router-link to="/CompositionAPI/wyl">http://localhost:5173/CompositionAPI/wyl</router-link>
+    </p>
+  </div>
+  <hr />
+  <!-- 12.RouterView插槽 -->
+  <div class="box">
+    <h2>12.RouterView插槽</h2>
+    <p>
+      1.当在处理 KeepAlive 组件时，我们通常想要保持路由组件活跃，而不是 RouterView 本身。为了实现这个目的，我们可以将 KeepAlive 组件放置在插槽内
+    </p>
+    <p>
+      2.详细信息可以通过vue-router文档查看, https://router.vuejs.org/zh/guide/advanced/router-view-slot.html.
+    </p>
+  </div>
+  <hr />
+  <!-- 13.过渡动效Transitions -->
+  <div class="box">
+    <p>1.实现了RouterView部分的逐渐显示组件内容的效果, 参考https://router.vuejs.org/zh/guide/advanced/transitions.html</p>
+  </div>
 </template> 
 
 <style scoped>
@@ -266,4 +317,13 @@ import store from './store';
       color: white;
     }
   }
+
+  /* 13.过渡动效  13.Transitions */
+  .fade-enter-active {
+    transition: opacity 1s ease;
+  }
+  .fade-enter-from {
+    opacity: 0;
+  }
+
 </style>
