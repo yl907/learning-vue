@@ -5,6 +5,7 @@ const store = createStore({
   state() {
     return {
       login: true,
+      ifScroll: false,
     }
   },
   
@@ -12,6 +13,9 @@ const store = createStore({
     // mutation第一个参数默认是state
     changeAuth (state) {
       state.login = !state.login;
+    },
+    changeScrollBehavior (state) {
+      state.ifScroll = !state.ifScroll;
     }
   },
   

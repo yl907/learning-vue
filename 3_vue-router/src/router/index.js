@@ -157,7 +157,21 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: routes
+  routes: routes,
+  // 14.滚动行为
+  scrollBehavior(to, from, savedPosition) {
+    if (store.state.ifScroll) {
+      // 始终滚动到顶部
+      return { 
+        top: 0, 
+        // 模仿window.scroll平滑滚动行为
+        behavior: 'smooth',
+      }
+    }
+    
+    // 不进行滚动操作
+    return false;
+  },
 })
 
 // *************

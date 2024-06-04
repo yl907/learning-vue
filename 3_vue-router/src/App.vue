@@ -1,7 +1,7 @@
 <script>
   import dataEggs from './data.json'
   import ProgramNavComp from './components/5_1ProgrammaticNavigation.vue'
-import store from './store';
+  import store from './store';
 
   export default {
     data() {
@@ -20,7 +20,9 @@ import store from './store';
     methods: {
       changeAuth() {
         store.commit('changeAuth');
-
+      },
+      changeScrollBehavior() {
+        store.commit('changeScrollBehavior');
       },
     },
 
@@ -270,7 +272,26 @@ import store from './store';
   <hr />
   <!-- 13.过渡动效Transitions -->
   <div class="box">
+    <h2>13.过渡动效</h2>
     <p>1.实现了RouterView部分的逐渐显示组件内容的效果, 参考https://router.vuejs.org/zh/guide/advanced/transitions.html</p>
+  </div>
+  <hr />
+  <!-- 14.滚动行为 -->
+  <div class="box">
+    <h2>14.滚动行为</h2>
+    <p v-pre>
+    1.具体代码 <br />
+    scrollBehavior(to, from, savedPosition) { <br />
+      // 始终滚动到顶部<br />
+      return { <br />
+        top: 0, <br />
+        // 模仿window.scroll平滑滚动行为<br />
+        behavior: 'smooth',<br />
+      }<br />
+    }
+    </p>
+    <p>2.当你点击以下按钮后, 将改变点击路由后是否进行滚动行为。</p>
+    <button @click="changeScrollBehavior">点击改变滚动行为, 当前是否滚动 [{{ $store.state.ifScroll }}]</button>
   </div>
 </template> 
 
