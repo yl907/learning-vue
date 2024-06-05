@@ -15,9 +15,15 @@ import NamedViews from '../views/6_1DefaultView.vue'
 import LeftSidebar from '../views/6_2LeftSidebar.vue'
 import RightSidebar from '../views/6_3RightSidebar.vue'
 import Login from '../views/9Login.vue'
-import DataFetching1 from '../views/10_1DataFetching.vue'
-import DataFetching2 from '../views/10_2DataFetching.vue'
-import CompositionAPI from '../views/11CompositionAPI.vue'
+// import DataFetching1 from '../views/10_1DataFetching.vue'
+// import DataFetching2 from '../views/10_2DataFetching.vue'
+// import CompositionAPI from '../views/11CompositionAPI.vue'
+
+// 15.路由懒加载  15.Lazy Loading Routes
+// 我修改了上述10~11部分的路由组件的导入, 改为了路由懒加载的形式, 当路由被访问的时候才加载对应组件
+const DataFetching1 = () => import('../views/10_1DataFetching.vue')
+const DataFetching2 = () => import('../views/10_2DataFetching.vue')
+const CompositionAPI = () => import('../views/11CompositionAPI.vue')
 
 // 这是关于9.路由元信息的内容------
 import store from '../store'
